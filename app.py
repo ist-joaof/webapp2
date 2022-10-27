@@ -14,7 +14,7 @@ def main(rest=None):
 	path = flask.request.url_root.split('/')
 	if(len(path) > 4 and path[3].isdigit()):
 		try:
-			return(out, int(path[3]))
+			return(flask.Response(out, status=int(path[3])))
 		except:
 			return(out)
 	else:
