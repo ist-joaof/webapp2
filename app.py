@@ -11,9 +11,8 @@ def main(rest=None):
 		out += '\n\t\t\t\t<td> ' + flask.request.headers[value] + ' </td>'
 		out += '\n\t\t\t</tr>'
 	out += '\n\t\t</div>\n\t</div>\n</body></html>'
-	path = flask.request.url_root.split('/')
-	return(flask.request.url)
-	if(len(path) > 4 and path[3].isdigit()):
+	path = flask.request.url.split('/')
+	if(path[3].isdigit()):
 		status = int(path[3])
 		if(status >= 400):
 			flask.abort(status)
