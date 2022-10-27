@@ -10,11 +10,11 @@ def hello():
 		out += '\n\t\t\t\t<td> ' + flask.request.headers[value] + ' </td>'
 		out += '\n\t\t\t</tr>'
 	out += '\n\t\t</div>\n\t</div>\n</body></html>'
-    path = flask.request.url_root.split('/')
-    if(len(path) > 4 and path[3].isdigit()):
-        try:
-            return(out, int(path[3]))
-        except:
-            return(out)
-    else:
-	return(out)
+	path = flask.request.url_root.split('/')
+	if(len(path) > 4 and path[3].isdigit()):
+	try:
+		return(out, int(path[3]))
+	except:
+		return(out)
+	else:
+		return(out)
