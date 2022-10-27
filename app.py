@@ -16,5 +16,5 @@ def hello():
 
 @app.route("/404")
 def page_not_found():
-    return 404
+    return('page not found', 404)
 
