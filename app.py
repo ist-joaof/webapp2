@@ -14,8 +14,11 @@ def main(rest=None):
 	path = flask.request.url_root.split('/')
 	if(len(path) > 4 and path[3].isdigit()):
 		try:
+			print(path[3])
 			return(flask.Response(out, status=int(path[3])))
 		except:
+			print('Special Status)
 			return(out)
 	else:
+		print('regular out')
 		return(out)
