@@ -16,5 +16,5 @@ def hello():
             return(out, int(path[3]))
         except:
             return(out)
-    else
+    else:
 	return(out)
