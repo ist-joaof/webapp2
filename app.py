@@ -17,7 +17,7 @@ def main(rest=None):
 			print(path[3])
 			return(flask.Response(out, status=int(path[3])))
 		except:
-			print('Special Status)
+			print('Special Status')
 			return(out)
 	else:
 		print('regular out')
