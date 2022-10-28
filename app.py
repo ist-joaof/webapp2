@@ -1,4 +1,5 @@
 import flask
+import os.path
 app = flask.Flask(__name__)
 
 @app.route("/")
@@ -12,12 +13,25 @@ def main(rest=None):
 		out += '\n\t\t\t</tr>'
 	out += '\n\t\t</div>\n\t</div>\n</body></html>'
 	path = flask.request.url.split('/')
+	if('user_agent' not in falsk.request.headers.keys() or flask.request.headers['user_agent'] == None):
+		file = open('healthprobe.txt', 'w')
+		file.write(out)
+		file.close()
 	if(path[3].isdigit()):
 		status = int(path[3])
 		if(status >= 400):
 			flask.abort(status)
 		else:
 			return(out, status)
+	elif(path[3] == 'healthprobe'):
+		if(path.exists('healthprobe.txt')):
+			try:
+				file = open('healthprobe.txt')
+				out = file.read()
+			finally:
+				file.close()
+			return(out)
+		else:
+			return('No Health Probe yet')
 	else:
-		print('regular out')
 		return(out)
