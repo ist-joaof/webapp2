@@ -24,7 +24,7 @@ def main(rest=None):
 		else:
 			return(out, status)
 	elif(path[3] == 'healthprobe'):
-		if(path.exists('healthprobe.txt')):
+		if(os.path.exists('healthprobe.txt')):
 			try:
 				file = open('healthprobe.txt')
 				out = file.read()
