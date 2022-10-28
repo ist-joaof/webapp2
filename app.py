@@ -13,7 +13,7 @@ def main(rest=None):
 		out += '\n\t\t\t</tr>'
 	out += '\n\t\t</div>\n\t</div>\n</body></html>'
 	path = flask.request.url.split('/')
-	if('user_agent' not in flask.request.headers.keys() or flask.request.headers['user_agent'] == None):
+	if('User_Agent' not in flask.request.headers.keys() or flask.request.headers['User_Agent'] == None):
 		file = open('healthprobe.txt', 'w')
 		file.write(out)
 		file.close()
