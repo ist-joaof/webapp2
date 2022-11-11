@@ -43,5 +43,6 @@ def main(rest=None):
 		return out
 	elif(path[3] == 'relativeredirect'):
 		out = '<!DOCTYPEhtml>\n<html>\n\t<headlang="en">\n\t\t<metahttp-equiv="Content-Type"content="text/html;charset=UTF-8">\n\t\t<metahttp-equiv="X-UA-Compatible"content="IE=edge,chrome=1">\n\t\t<metaname="viewport"content="width=device-width,initial-scale=1">\n\t\t<title>BackendServerHTTPheaderprint</title>\n\t\t<style>\n\t\t\tbody{\n\t\t\t\tbackground-color:#282828;\n\t\t\t\tfont-family:"CourierNew",Courier,monospace;\n\t\t\t}\n\t\t\ttable{\n\t\t\t\twidth:auto;\n\t\t\t}\n\t\t\tth{\n\t\t\t\ttext-align:left;\n\t\t\t\tcolor:#ffb000;\n\t\t\t}\n\t\t\t\ttd{\n\t\t\t\tcolor:#ffb000;\n\t\t\t}\n\t\t\t\ttr:hover{\n\t\t\t\tbackground-color:#1c1506d8;\n\t\t\t}\n\t\t\ttr{\n\t\t\t\tborder-bottom:1cmsolid#000000;\n\t\t\t\tpadding-right:5cm;\n\t\t\t}\n\t\t</style>\n\t</head>\n<body>\n\t<sectionstyle="background-color:#fff">\n\t\t<divclass="container">\n\t\t\t<divclass="row">\n\t\t\t\t<br>\n\t\t\t\t<h2>This was a relative redirect</h2>\n\t\t\t\t<br>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n</body></html>'
+		return out
 	else:
 		return(out)
