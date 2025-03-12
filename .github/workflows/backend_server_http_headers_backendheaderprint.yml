@@ -13,14 +13,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.9'
 
       - name: Create and start virtual environment
         run: |
@@ -31,13 +33,16 @@ jobs:
         run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
-            . 
+            release.zip
             !venv/
 
   deploy:
@@ -46,18 +51,31 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: python-app
-          path: .
-          
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9B12B4FB334D485185C4A5E104AEA715 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EAAA6CF53E0A484C856092797CBBC3ED }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_324284942130474E980B2E0F408FADA2 }}
+
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'backendheaderprint'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DCB01A95ECAF456FBF4467EB3DDAB783 }}
+          
